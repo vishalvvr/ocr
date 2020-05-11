@@ -1,0 +1,5 @@
+extracted_text.yml
+tmp/
+__pycache__/
+*.pyc
+test.py

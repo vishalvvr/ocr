@@ -3,6 +3,7 @@ import time
 from pytesseract import pytesseract
 from PIL import Image, ImageEnhance
 import yaml
+import argparse
 
 class OCR:
     def __init__(self):
@@ -120,7 +121,17 @@ class OCR:
 
 
 if __name__ == "__main__":
-    # create a list of image filename from which text is to be extracted
-    image_path = ['1505207962.74827.png','1505484439.1017778.png']
+    parser = argparse.ArgumentParser(prog='PROG',description="This is a simple OCR script which uses tesseract ocr internally to extract text.")
+    parser.add_argument("-f", "--file", required=True, help="Pass image file path seperated by ',' if many")
+    args = vars(parser.parse_args())
+    image_path = list()
+    
+    if "," in args['file']:
+        image_path.extend(args['file'].split(','))
+        print(image_path)
+    else:
+        image_path.append(args['file'])
+        print(image_path)
+    
     obj = OCR()
     obj.my_ocr(image_path)
